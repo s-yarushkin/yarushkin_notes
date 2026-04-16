@@ -410,7 +410,7 @@ function renderCardsData(monthIndex) {
   sorted.forEach((item, rank) => {
     const el = document.getElementById('card-' + item.sc.id);
     if(!el) return;
-    el.style.order = rank; // Моментальная пересортировка через CSS Flex/Grid Order
+    el.style.order = rank;
 
     const profit = item.final - inv;
     const pct = ((profit/inv)*100).toFixed(1);
@@ -488,33 +488,12 @@ function initChart() {
         if(elements && elements.length > 0) {
           renderCardsData(elements[0].index);
         } else {
-          renderCardsData(labels.length - 1); // Сброс при уходе курсора
+          renderCardsData(labels.length - 1); 
         }
       },
       plugins: {
         legend: { display: false },
-        tooltip: {
-          enabled: window.innerWidth > 768, // ОТКЛЮЧЕНО НА МОБИЛКАХ
-          backgroundColor: '#1a1814',
-          borderColor: '#3a3630',
-          borderWidth: 1,
-          titleColor: '#9a9488',
-          bodyColor: '#faf8f4',
-          titleFont: { family:'DM Mono', size:10 },
-          bodyFont: { family:'DM Mono', size:10 },
-          padding: 8,
-          boxPadding: 4,
-          usePointStyle: true,
-          itemSort: (a, b) => b.parsed.y - a.parsed.y,
-          callbacks: {
-            title: items => items[0].label,
-            label: item => {
-              let val = item.parsed.y;
-              let formatted = val >= 1e6 ? (val/1e6).toFixed(2) + 'M ₽' : Math.round(val).toLocaleString('ru-RU') + ' ₽';
-              return ` ${item.dataset.label}: ${formatted}`;
-            }
-          }
-        }
+        tooltip: { enabled: false } // Тултип полностью отключен на всех устройствах
       },
       scales: {
         x: { grid: { color:'rgba(0,0,0,0.05)', drawTicks:false }, border: { color:'#e8e3d9' }, ticks: { color:'#b0aa9e', font:{ family:'DM Mono', size:9 }, maxTicksLimit: 14, maxRotation: 0 } },
