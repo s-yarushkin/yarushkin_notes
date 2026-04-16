@@ -157,7 +157,7 @@ footer { border-top: 1px solid var(--border); padding: 22px 0; display: flex; ju
     
     <div class="intro-block">
       <strong>Зачем нужен этот калькулятор?</strong>
-      <p>Мы часто думаем, что инвестиции — это удел богатых, а 500 рублей на утренний кофе или пара тысяч на доставку еды в пятницу глобально ничего не решают. Я решил оцифровать эту иллюзию.</p>
+      <p>Мы часто думаем, что инвестиции — это удел богатых, а 200 рублей на утренний кофе или пара тысяч на доставку еды в пятницу глобально ничего не решают. Я решил оцифровать эту иллюзию.</p>
       <p>Здесь мы жестко, на реальных исторических данных сравниваем: что было бы, если ваши ежемесячные импульсивные траты направлялись в твердые активы. От консервативных вкладов до акций, валюты и драгметаллов.</p>
       <p>Больше честной практики об управлении деньгами — в моем проекте <a href="https://t.me/yarushkin_notes" target="_blank" class="intro-link">«Внутренний порядок» →</a></p>
     </div>
@@ -225,7 +225,7 @@ footer { border-top: 1px solid var(--border); padding: 22px 0; display: flex; ju
 
 <footer>
   <div class="page" style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;width:100%">
-    <p class="disclaimer">* Расчёты основаны на исторических котировках. Металлы пересчитаны в рубли за грамм по данным ЦБ РФ. Дивиденды по акциям реинвестируются с учётом НДФЛ 13%. Прошлая доходность не гарантирует будущих результатов. Только в образовательных целях.</p>
+    <p class="disclaimer">* Расчёты основаны на исторических котировках. Металлы пересчитаны в рубли за грамм по данным ЦБ РФ. Дивиденды по акциям реинвестируются с учётом НДФЛ 13%.<br><strong>Не является индивидуальной инвестиционной рекомендацией. Прошлая доходность не гарантирует будущих результатов. Только в образовательных целях.</strong></p>
     <div class="total-box">
       <div class="total-label">Всего инвестировано</div>
       <div class="total-val" id="totalInv">—</div>
@@ -434,7 +434,7 @@ function renderCardsData(monthIndex) {
 }
 
 /* ═══════════════════════════════════════════
-   ГРАФИК И ОБНОВЛЕНИЯ
+   ГРАФИК И ОБНОВЛЕНИЯ С ФИЗИКОЙ ЛЕЙБЛОВ
 ═══════════════════════════════════════════ */
 function initChart() {
   const ctx = document.getElementById('myChart').getContext('2d');
@@ -448,14 +448,47 @@ function initChart() {
           const ctx = chart.ctx;
           ctx.font = "500 10px 'DM Mono'";
           ctx.textBaseline = 'middle';
+          
+          let labelsMeta = [];
           chart.data.datasets.forEach((dataset, i) => {
             if(!chart.isDatasetVisible(i)) return;
             const meta = chart.getDatasetMeta(i);
             const lastPoint = meta.data[meta.data.length - 1];
             if(lastPoint) {
-              ctx.fillStyle = dataset.borderColor;
-              ctx.fillText(' ' + dataset.label, lastPoint.x + 6, lastPoint.y);
+              labelsMeta.push({
+                text: ' ' + dataset.label,
+                color: dataset.borderColor,
+                x: lastPoint.x + 6,
+                y: lastPoint.y
+              });
             }
+          });
+
+          // Сортировка по высоте
+          labelsMeta.sort((a, b) => a.y - b.y);
+
+          // Алгоритм расталкивания (collision resolution)
+          const minSpace = 16; 
+          let overlap = true;
+          let iterations = 0;
+          while(overlap && iterations < 15) {
+            overlap = false;
+            for(let i = 0; i < labelsMeta.length - 1; i++) {
+              let diff = labelsMeta[i+1].y - labelsMeta[i].y;
+              if(diff < minSpace) {
+                let push = (minSpace - diff) / 2;
+                labelsMeta[i].y -= push;
+                labelsMeta[i+1].y += push;
+                overlap = true;
+              }
+            }
+            iterations++;
+          }
+
+          // Финальная отрисовка
+          labelsMeta.forEach(item => {
+            ctx.fillStyle = item.color;
+            ctx.fillText(item.text, item.x, item.y);
           });
         }
       },
@@ -482,7 +515,7 @@ function initChart() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      layout: { padding: { right: 80 } },
+      layout: { padding: { right: 90 } }, // чуть увеличил отступ
       interaction: { mode:'index', intersect:false },
       onHover: (e, elements) => {
         if(elements && elements.length > 0) {
@@ -493,7 +526,7 @@ function initChart() {
       },
       plugins: {
         legend: { display: false },
-        tooltip: { enabled: false } // Тултип полностью отключен на всех устройствах
+        tooltip: { enabled: false }
       },
       scales: {
         x: { grid: { color:'rgba(0,0,0,0.05)', drawTicks:false }, border: { color:'#e8e3d9' }, ticks: { color:'#b0aa9e', font:{ family:'DM Mono', size:9 }, maxTicksLimit: 14, maxRotation: 0 } },
