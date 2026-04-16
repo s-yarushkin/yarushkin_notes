@@ -48,446 +48,103 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Layout ── */
 .page { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
 
 /* ── Hero ── */
-.hero {
-  padding: 52px 0 36px;
-  border-bottom: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::after {
-  content: '☕';
-  position: absolute;
-  right: -10px; top: 10px;
-  font-size: 160px;
-  opacity: 0.05;
-  user-select: none;
-  pointer-events: none;
-  line-height: 1;
-}
-
-.hero-tag {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--amber);
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+.hero { padding: 52px 0 36px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+.hero::after { content: '☕'; position: absolute; right: -10px; top: 10px; font-size: 160px; opacity: 0.05; user-select: none; pointer-events: none; line-height: 1; }
+.hero-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
 .hero-tag::before { content:''; display:block; width:28px; height:1px; background:var(--amber); }
-
-h1 {
-  font-family: var(--font-disp);
-  font-size: clamp(30px, 5.5vw, 64px);
-  font-weight: 900;
-  line-height: 1.05;
-  color: var(--ink);
-  max-width: 720px;
-  margin-bottom: 16px;
-}
-
+h1 { font-family: var(--font-disp); font-size: clamp(30px, 5.5vw, 64px); font-weight: 900; line-height: 1.05; color: var(--ink); max-width: 720px; margin-bottom: 16px; }
 h1 em { color: var(--amber); font-style: normal; }
 
-.intro-block {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--amber);
-  padding: 22px 26px;
-  margin-top: 24px;
-  border-radius: var(--r);
-  font-size: 14px;
-  color: var(--ink2);
-  max-width: 800px;
-  position: relative;
-  z-index: 2;
-}
-.intro-block strong {
-  display: block;
-  font-family: var(--font-disp);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 12px;
-}
+.intro-block { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--amber); padding: 22px 26px; margin-top: 24px; border-radius: var(--r); font-size: 14px; color: var(--ink2); max-width: 800px; position: relative; z-index: 2; }
+.intro-block strong { display: block; font-family: var(--font-disp); font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
 .intro-block p { margin-bottom: 12px; }
 .intro-block p:last-child { margin-bottom: 0; }
-.intro-link {
-  display: inline-flex;
-  align-items: center;
-  color: var(--amber);
-  text-decoration: none;
-  font-weight: 500;
-  transition: opacity .15s;
-}
+.intro-link { display: inline-flex; align-items: center; color: var(--amber); text-decoration: none; font-weight: 500; transition: opacity .15s; }
 .intro-link:hover { opacity: .7; }
 
 /* ── Controls ── */
-.controls-bar {
-  padding: 28px 0;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: flex-end;
-  gap: 32px;
-  flex-wrap: wrap;
-}
+.controls-bar { padding: 28px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.input-wrap { position: relative; display: flex; align-items: center; }
+.input-prefix { position: absolute; left: 14px; font-family: var(--font-mono); font-size: 20px; color: var(--amber); font-weight: 500; pointer-events: none; user-select: none; }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.field-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.input-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.input-prefix {
-  position: absolute;
-  left: 14px;
-  font-family: var(--font-mono);
-  font-size: 20px;
-  color: var(--amber);
-  font-weight: 500;
-  pointer-events: none;
-  user-select: none;
-}
-
-input[type="number"] {
-  background: var(--surface);
-  border: 1.5px solid var(--border2);
-  color: var(--ink);
-  font-family: var(--font-mono);
-  font-size: 26px;
-  font-weight: 500;
-  padding: 10px 18px 10px 40px;
-  width: 240px;
-  outline: none;
-  border-radius: var(--r);
-  transition: border-color .2s, box-shadow .2s;
-  -moz-appearance: textfield;
-}
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
-input[type="number"]:focus {
-  border-color: var(--amber);
-  box-shadow: 0 0 0 3px rgba(200,114,10,.12);
-}
+input[type="number"] { background: var(--surface); border: 1.5px solid var(--border2); color: var(--ink); font-family: var(--font-mono); font-size: 26px; font-weight: 500; padding: 10px 18px 10px 40px; width: 240px; outline: none; border-radius: var(--r); transition: border-color .2s, box-shadow .2s; -moz-appearance: textfield; }
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+input[type="number"]:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(200,114,10,.12); }
 
 .slider-wrap { display:flex; flex-direction:column; gap:7px; flex:1; min-width:180px; max-width:380px; }
-
-input[type="range"] {
-  -webkit-appearance: none;
-  height: 3px;
-  background: var(--border2);
-  border-radius: 99px;
-  outline: none;
-  cursor: pointer;
-  width: 100%;
-}
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: var(--amber);
-  cursor: pointer;
-  border: 3px solid var(--surface);
-  box-shadow: 0 1px 4px rgba(0,0,0,.25);
-  transition: transform .15s;
-}
+input[type="range"] { -webkit-appearance: none; height: 3px; background: var(--border2); border-radius: 99px; outline: none; cursor: pointer; width: 100%; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--amber); cursor: pointer; border: 3px solid var(--surface); box-shadow: 0 1px 4px rgba(0,0,0,.25); transition: transform .15s; }
 input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.15); }
+.range-ends { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
 
-.range-ends {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--muted);
-}
-
-.presets {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.preset-btn {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  padding: 6px 12px;
-  border: 1px solid var(--border2);
-  background: var(--surface);
-  color: var(--ink2);
-  cursor: pointer;
-  border-radius: var(--r);
-  transition: background .15s, border-color .15s, color .15s;
-}
+.presets { display: flex; gap: 6px; flex-wrap: wrap; }
+.preset-btn { font-family: var(--font-mono); font-size: 11px; padding: 6px 12px; border: 1px solid var(--border2); background: var(--surface); color: var(--ink2); cursor: pointer; border-radius: var(--r); transition: background .15s, border-color .15s, color .15s; }
 .preset-btn:hover { background: var(--surface2); border-color: var(--amber); }
 .preset-btn.active { background: var(--amber); border-color: var(--amber); color: #fff; }
 
 /* ── Legend pills ── */
-.legend-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  padding: 20px 0 4px;
-}
-
-.leg {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink2);
-  padding: 4px 10px;
-  border: 1px solid var(--border);
-  border-radius: 99px;
-  cursor: pointer;
-  user-select: none;
-  transition: opacity .2s;
-}
+.legend-row { display: flex; gap: 8px; flex-wrap: wrap; padding: 20px 0 4px; }
+.leg { display: flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; color: var(--ink2); padding: 4px 10px; border: 1px solid var(--border); border-radius: 99px; cursor: pointer; user-select: none; transition: opacity .2s; }
 .leg.hidden { opacity: .35; }
 .leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
 /* ── Chart ── */
-.chart-section {
-  padding: 8px 0 32px;
-  border-bottom: 1px solid var(--border);
-}
-
-.chart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 0 12px;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.chart-title {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.period-badge {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--amber);
-  border: 1px solid rgba(200,114,10,.3);
-  padding: 3px 10px;
-  border-radius: 99px;
-  letter-spacing: .06em;
-}
-
-.chart-box {
-  position: relative;
-  height: 400px;
-}
-
+.chart-section { padding: 8px 0 32px; border-bottom: 1px solid var(--border); }
+.chart-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 12px; flex-wrap: wrap; gap: 8px; }
+.chart-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.period-badge { font-family: var(--font-mono); font-size: 10px; color: var(--amber); border: 1px solid rgba(200,114,10,.3); padding: 3px 10px; border-radius: 99px; letter-spacing: .06em; }
+.chart-hint { text-align: center; font-size: 11px; color: var(--muted); padding-top: 10px; font-family: var(--font-mono); }
+.chart-box { position: relative; height: 400px; }
 @media(max-width:600px){ .chart-box { height: 260px; } }
 
 /* ── Cards ── */
 .results-section { padding: 36px 0 32px; border-bottom: 1px solid var(--border); }
-
-.section-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
+.section-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; transition: color 0.2s; }
+.section-label.active-scrub { color: var(--amber); }
 .section-label::after { content:''; flex:1; height:1px; background:var(--border); }
 
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 10px;
-}
-
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 20px 18px 16px;
-  position: relative;
-  overflow: hidden;
-  transition: box-shadow .2s, transform .2s;
-  cursor: default;
-}
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 20px 18px 16px; position: relative; overflow: hidden; transition: box-shadow .2s, transform .2s; cursor: default; display: flex; flex-direction: column; }
 .card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.08); transform: translateY(-1px); }
-
-.card-bar {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-}
-
-.card-rank {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--muted);
-  margin-bottom: 6px;
-  letter-spacing: .06em;
-}
-
-.card-name {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-
-.card-value {
-  font-family: var(--font-disp);
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.card-profit {
-  font-family: var(--font-mono);
-  font-size: 11px;
-}
-
-.card-winner::after {
-  content: '🏆';
-  position: absolute;
-  right: 12px; top: 10px;
-  font-size: 16px;
-}
+.card-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.card-rank { font-family: var(--font-mono); font-size: 10px; color: var(--muted); margin-bottom: 6px; letter-spacing: .06em; }
+.card-name { font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.card-value { font-family: var(--font-disp); font-weight: 700; font-size: 22px; line-height: 1; margin-bottom: 8px; }
+.card-profit { font-family: var(--font-mono); font-size: 11px; }
+.card-winner::after { content: '🏆'; position: absolute; right: 12px; top: 10px; font-size: 16px; }
 
 /* ── Table ── */
 .table-section { padding: 0 0 48px; }
-
 .table-wrap { overflow-x: auto; }
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  min-width: 560px;
-}
-
+table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 12px; min-width: 560px; }
 thead tr { border-bottom: 2px solid var(--border2); }
-
-th {
-  text-align: left;
-  padding: 10px 14px;
-  font-size: 10px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 400;
-  white-space: nowrap;
-}
+th { text-align: left; padding: 10px 14px; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 400; white-space: nowrap; }
 th:not(:first-child) { text-align: right; }
-
-td {
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--border);
-  vertical-align: middle;
-}
+td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
 td:not(:first-child) { text-align: right; }
-
 tr:hover td { background: var(--surface2); }
-
-.rank-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px; height: 20px;
-  background: var(--surface2);
-  border-radius: 50%;
-  font-size: 10px;
-  color: var(--muted);
-  margin-right: 6px;
-}
-
-.dot-inline {
-  display: inline-block;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  margin-right: 6px;
-  vertical-align: middle;
-}
-
+.rank-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: var(--surface2); border-radius: 50%; font-size: 10px; color: var(--muted); margin-right: 6px; }
+.dot-inline { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
 td.pos { color: var(--green); }
 td.neg { color: var(--red); }
 td.neut { color: var(--muted); }
-
 tr.top-row td { font-weight: 500; }
 
 /* ── Footer ── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 22px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.disclaimer {
-  font-size: 11px;
-  color: var(--muted);
-  font-style: italic;
-  line-height: 1.6;
-  max-width: 620px;
-}
-
-.total-box {
-  text-align: right;
-  font-family: var(--font-mono);
-}
+footer { border-top: 1px solid var(--border); padding: 22px 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+.disclaimer { font-size: 11px; color: var(--muted); font-style: italic; line-height: 1.6; max-width: 620px; }
+.total-box { text-align: right; font-family: var(--font-mono); }
 .total-label { font-size: 10px; color: var(--muted); letter-spacing:.08em; text-transform:uppercase; }
-.total-val {
-  font-family: var(--font-disp);
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--ink);
-}
+.total-val { font-family: var(--font-disp); font-size: 26px; font-weight: 700; color: var(--ink); }
 
-/* ── Animations ── */
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(12px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-.hero, .controls-bar, .chart-section, .results-section, .table-section {
-  animation: fadeUp .5s ease both;
-}
-.controls-bar { animation-delay:.07s; }
-.chart-section { animation-delay:.14s; }
-.results-section { animation-delay:.21s; }
-.table-section { animation-delay:.28s; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+.hero, .controls-bar, .chart-section, .results-section, .table-section { animation: fadeUp .5s ease both; }
+.controls-bar { animation-delay:.07s; } .chart-section { animation-delay:.14s; } .results-section { animation-delay:.21s; } .table-section { animation-delay:.28s; }
 </style>
 </head>
 <body>
@@ -502,7 +159,7 @@ footer {
       <strong>Зачем нужен этот калькулятор?</strong>
       <p>Мы часто думаем, что инвестиции — это удел богатых, а 500 рублей на утренний кофе или пара тысяч на доставку еды в пятницу глобально ничего не решают. Я решил оцифровать эту иллюзию.</p>
       <p>Здесь мы жестко, на реальных исторических данных сравниваем: что было бы, если ваши ежемесячные импульсивные траты направлялись в твердые активы. От консервативных вкладов до акций, валюты и драгметаллов.</p>
-      <p>Больше честной практики об управлении деньгами — в моем TenChat профиле <a href="#" class="intro-link">«Внутренний порядок» →</a></p>
+      <p>Больше честной практики об управлении деньгами — в моем проекте <a href="https://t.me/yarushkin_notes" target="_blank" class="intro-link">«Внутренний порядок» →</a></p>
     </div>
   </header>
 
@@ -514,13 +171,11 @@ footer {
         <input type="number" id="amtInput" value="5000" min="0" max="500000" step="500">
       </div>
     </div>
-
     <div class="field slider-wrap">
       <div class="field-label">Сумма (ползунок)</div>
       <input type="range" id="amtRange" min="0" max="15000" step="500" value="5000">
       <div class="range-ends"><span>0 ₽</span><span>15 000 ₽</span></div>
     </div>
-
     <div class="field">
       <div class="field-label">Быстрый выбор</div>
       <div class="presets">
@@ -536,16 +191,15 @@ footer {
       <div class="chart-title">Накопленный капитал (₽) · Ежемесячные взносы</div>
       <div class="period-badge">Янв 2019 → Мар 2026</div>
     </div>
-
     <div class="legend-row" id="legendRow"></div>
-
     <div class="chart-box">
       <canvas id="myChart"></canvas>
     </div>
+    <div class="chart-hint">👆 Коснитесь и проведите по графику, чтобы увидеть точный срез по месяцам</div>
   </div>
 
   <div class="results-section">
-    <div class="section-label">Итог на март 2026 — сортировка по капиталу</div>
+    <div class="section-label" id="cardsLabel">Итог на Март 2026 — сортировка по капиталу</div>
     <div class="cards-grid" id="cardsGrid"></div>
   </div>
 
@@ -581,8 +235,7 @@ footer {
 
 <script>
 /* ═══════════════════════════════════════════
-   Синтезированная база исторических котировок 
-   (USD/RUB, Золото, Серебро, Платина в рублях за грамм по ЦБ РФ)
+   Синтезированная база исторических котировок (ЦБ РФ)
 ═══════════════════════════════════════════ */
 const CSV_RAW = `Date,SBER,LKOH,PHOR,USD_RUB,GLD_RUB,SLV_RUB,PLT_RUB,CB_RATE
 2019-01-01,200.00,5000.00,2500.00,67.15,2850,33.5,1720,0.0750
@@ -696,65 +349,20 @@ let monthly = 5000;
 let hidden  = new Set();
 let chart;
 
+let globalResults = null;
+let globalInvestedArray = [];
+
 /* ═══════════════════════════════════════════
    ЛОГИКА РАСЧЕТОВ
 ═══════════════════════════════════════════ */
-function calcCash(rows, m) {
-  let v=0, out=[];
-  for(let i=0;i<rows.length;i++){ v+=m; out.push(v); }
-  return out;
-}
+function calcCash(rows, m) { let v=0, out=[]; for(let i=0;i<rows.length;i++){ v+=m; out.push(v); } return out; }
+function calcDeposit(rows, m) { let v=0, out=[]; for(let i=0;i<rows.length;i++){ v+=m; const r = Math.max(0.03, rows[i].CB_RATE - 0.01) / 12; v *= (1+r); out.push(v); } return out; }
+function calcOFZ(rows, m) { let v=0, out=[]; for(let i=0;i<rows.length;i++){ v+=m; const r = Math.max(0.04, rows[i].CB_RATE + 0.01) / 12; v *= (1+r); out.push(v); } return out; }
+function calcStock(rows, m, priceKey, divsMap) { let shares=0, cache=0, out=[]; for(let i=0;i<rows.length;i++){ const price = rows[i][priceKey]; shares += (m + cache) / price; cache = 0; out.push(shares * price); if(divsMap[i] !== undefined){ cache = shares * divsMap[i] * 0.87; } } return out; }
+function calcAsset(rows, m, priceKey) { let units = 0, out = []; for(let i=0;i<rows.length;i++){ units += m / rows[i][priceKey]; out.push(units * rows[i][priceKey]); } return out; }
 
-function calcDeposit(rows, m) {
-  let v=0, out=[];
-  for(let i=0;i<rows.length;i++){
-    v+=m;
-    const r = Math.max(0.03, rows[i].CB_RATE - 0.01) / 12;
-    v *= (1+r);
-    out.push(v);
-  }
-  return out;
-}
-
-function calcOFZ(rows, m) {
-  let v=0, out=[];
-  for(let i=0;i<rows.length;i++){
-    v+=m;
-    const r = Math.max(0.04, rows[i].CB_RATE + 0.01) / 12;
-    v *= (1+r);
-    out.push(v);
-  }
-  return out;
-}
-
-function calcStock(rows, m, priceKey, divsMap) {
-  let shares=0, cache=0, out=[];
-  for(let i=0;i<rows.length;i++){
-    const price = rows[i][priceKey];
-    shares += (m + cache) / price;
-    cache = 0;
-    out.push(shares * price);
-    if(divsMap[i] !== undefined){
-      cache = shares * divsMap[i] * 0.87;
-    }
-  }
-  return out;
-}
-
-function calcAsset(rows, m, priceKey) {
-  let units = 0, out = [];
-  for(let i=0;i<rows.length;i++){
-    units += m / rows[i][priceKey];
-    out.push(units * rows[i][priceKey]);
-  }
-  return out;
-}
-
-function runAll() {
-  const n = csvRows.length;
-  const invested = monthly * n;
-
-  const results = {
+function runCalculations() {
+  globalResults = {
     cash: calcCash(csvRows, monthly),
     dep:  calcDeposit(csvRows, monthly),
     ofz:  calcOFZ(csvRows, monthly),
@@ -766,8 +374,7 @@ function runAll() {
     slv:  calcAsset(csvRows, monthly, 'SLV_RUB'),
     plt:  calcAsset(csvRows, monthly, 'PLT_RUB'),
   };
-
-  return { results, invested };
+  globalInvestedArray = csvRows.map((_, i) => monthly * (i + 1));
 }
 
 /* ═══════════════════════════════════════════
@@ -778,80 +385,140 @@ function fmtRub(v, full=false) {
   if(!full && v>=1e3) return (v/1e3).toFixed(0) + ' тыс ₽';
   return Math.round(v).toLocaleString('ru-RU') + ' ₽';
 }
-function fmtFull(v) {
-  return Math.round(v).toLocaleString('ru-RU') + ' ₽';
+function fmtFull(v) { return Math.round(v).toLocaleString('ru-RU') + ' ₽'; }
+
+/* ═══════════════════════════════════════════
+   ИНТЕРАКТИВНЫЕ КАРТОЧКИ
+═══════════════════════════════════════════ */
+function initCardsDOM() {
+  const grid = document.getElementById('cardsGrid');
+  grid.innerHTML = '';
+  SCENARIOS.forEach(sc => {
+    const card = document.createElement('div');
+    card.id = 'card-' + sc.id;
+    card.className = 'card';
+    grid.appendChild(card);
+  });
 }
-function fmtPct(v, inv) {
-  const p = ((v-inv)/inv*100);
-  return (p>=0?'+':'')+p.toFixed(1)+'%';
+
+function renderCardsData(monthIndex) {
+  const inv = globalInvestedArray[monthIndex];
+  const sorted = SCENARIOS.map(sc => ({
+    sc, final: globalResults[sc.id][monthIndex]
+  })).sort((a,b) => b.final - a.final);
+
+  sorted.forEach((item, rank) => {
+    const el = document.getElementById('card-' + item.sc.id);
+    if(!el) return;
+    el.style.order = rank; // Моментальная пересортировка через CSS Flex/Grid Order
+
+    const profit = item.final - inv;
+    const pct = ((profit/inv)*100).toFixed(1);
+    const isWinner = rank === 0;
+
+    el.className = 'card' + (isWinner ? ' card-winner' : '');
+    el.innerHTML = `
+      <div class="card-bar" style="background:${item.sc.color}"></div>
+      <div class="card-rank">#${rank+1}</div>
+      <div class="card-name">${item.sc.label}</div>
+      <div class="card-value" style="color:${item.sc.color}">${fmtRub(item.final)}</div>
+      <div class="card-profit ${profit>=0?'pos':'neg'}" style="font-family:'DM Mono',monospace;font-size:11px;">
+        ${profit>=0?'+':''}${fmtRub(profit)} / ${profit>=0?'+':''}${pct}%
+      </div>`;
+  });
+
+  const labelEl = document.getElementById('cardsLabel');
+  const isScrubbing = monthIndex !== labels.length - 1;
+  labelEl.innerHTML = `Срез на ${labels[monthIndex]} — сортировка по капиталу`;
+  labelEl.className = 'section-label' + (isScrubbing ? ' active-scrub' : '');
 }
 
 /* ═══════════════════════════════════════════
-   ГРАФИК
+   ГРАФИК И ОБНОВЛЕНИЯ
 ═══════════════════════════════════════════ */
 function initChart() {
   const ctx = document.getElementById('myChart').getContext('2d');
   chart = new Chart(ctx, {
     type: 'line',
     data: { labels, datasets: [] },
-    plugins: [{
-      id: 'endLabels',
-      afterDraw: (chart) => {
-        const ctx = chart.ctx;
-        ctx.font = "500 10px 'DM Mono'";
-        ctx.textBaseline = 'middle';
-        chart.data.datasets.forEach((dataset, i) => {
-          if(!chart.isDatasetVisible(i)) return;
-          const meta = chart.getDatasetMeta(i);
-          const lastPoint = meta.data[meta.data.length - 1];
-          if(lastPoint) {
-            ctx.fillStyle = dataset.borderColor;
-            ctx.fillText(' ' + dataset.label, lastPoint.x + 6, lastPoint.y);
+    plugins: [
+      {
+        id: 'endLabels',
+        afterDraw: (chart) => {
+          const ctx = chart.ctx;
+          ctx.font = "500 10px 'DM Mono'";
+          ctx.textBaseline = 'middle';
+          chart.data.datasets.forEach((dataset, i) => {
+            if(!chart.isDatasetVisible(i)) return;
+            const meta = chart.getDatasetMeta(i);
+            const lastPoint = meta.data[meta.data.length - 1];
+            if(lastPoint) {
+              ctx.fillStyle = dataset.borderColor;
+              ctx.fillText(' ' + dataset.label, lastPoint.x + 6, lastPoint.y);
+            }
+          });
+        }
+      },
+      {
+        id: 'crosshairLine',
+        afterDraw: chart => {
+          if (chart.tooltip?._active?.length) {
+            let x = chart.tooltip._active[0].element.x;
+            let yAxis = chart.scales.y;
+            let ctx = chart.ctx;
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(x, yAxis.top);
+            ctx.lineTo(x, yAxis.bottom);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'rgba(200,114,10,0.5)';
+            ctx.setLineDash([4, 4]);
+            ctx.stroke();
+            ctx.restore();
           }
-        });
+        }
       }
-    }],
+    ],
     options: {
       responsive: true,
       maintainAspectRatio: false,
       layout: { padding: { right: 80 } },
       interaction: { mode:'index', intersect:false },
+      onHover: (e, elements) => {
+        if(elements && elements.length > 0) {
+          renderCardsData(elements[0].index);
+        } else {
+          renderCardsData(labels.length - 1); // Сброс при уходе курсора
+        }
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
+          enabled: window.innerWidth > 768, // ОТКЛЮЧЕНО НА МОБИЛКАХ
           backgroundColor: '#1a1814',
           borderColor: '#3a3630',
           borderWidth: 1,
           titleColor: '#9a9488',
           bodyColor: '#faf8f4',
           titleFont: { family:'DM Mono', size:10 },
-          bodyFont: { family:'DM Mono', size:11 },
-          padding: 13,
+          bodyFont: { family:'DM Mono', size:10 },
+          padding: 8,
+          boxPadding: 4,
+          usePointStyle: true,
           itemSort: (a, b) => b.parsed.y - a.parsed.y,
           callbacks: {
             title: items => items[0].label,
-            label: item => `  ${item.dataset.label}: ${Math.round(item.parsed.y).toLocaleString('ru-RU')} ₽`,
+            label: item => {
+              let val = item.parsed.y;
+              let formatted = val >= 1e6 ? (val/1e6).toFixed(2) + 'M ₽' : Math.round(val).toLocaleString('ru-RU') + ' ₽';
+              return ` ${item.dataset.label}: ${formatted}`;
+            }
           }
         }
       },
       scales: {
-        x: {
-          grid: { color:'rgba(0,0,0,0.05)', drawTicks:false },
-          border: { color:'#e8e3d9' },
-          ticks: { color:'#b0aa9e', font:{ family:'DM Mono', size:9 }, maxTicksLimit: 14, maxRotation: 0 }
-        },
-        y: {
-          grid: { color:'rgba(0,0,0,0.05)', drawTicks:false },
-          border: { color:'#e8e3d9', dash:[3,3] },
-          ticks: {
-            color:'#b0aa9e', font:{ family:'DM Mono', size:10 },
-            callback: v => {
-              if(v>=1e6) return (v/1e6).toFixed(1)+'M ₽';
-              if(v>=1e3) return (v/1e3).toFixed(0)+'K ₽';
-              return v+'₽';
-            }
-          }
-        }
+        x: { grid: { color:'rgba(0,0,0,0.05)', drawTicks:false }, border: { color:'#e8e3d9' }, ticks: { color:'#b0aa9e', font:{ family:'DM Mono', size:9 }, maxTicksLimit: 14, maxRotation: 0 } },
+        y: { grid: { color:'rgba(0,0,0,0.05)', drawTicks:false }, border: { color:'#e8e3d9', dash:[3,3] }, ticks: { color:'#b0aa9e', font:{ family:'DM Mono', size:10 }, callback: v => { if(v>=1e6) return (v/1e6).toFixed(1)+'M ₽'; if(v>=1e3) return (v/1e3).toFixed(0)+'K ₽'; return v+'₽'; } } }
       },
       elements: { point: { radius:0, hoverRadius:5 }, line: { tension:0.35 } },
       animation: { duration:450, easing:'easeInOutQuart' }
@@ -859,75 +526,20 @@ function initChart() {
   });
 }
 
-function buildDataset(sc, data) {
-  const isHidden = hidden.has(sc.id);
-  return {
-    id: sc.id,
-    label: sc.label,
-    data: data,
-    borderColor: sc.color,
-    backgroundColor: sc.colorLt,
-    borderWidth: sc.thick ? 3 : 1.8,
-    borderDash: sc.thick ? [6,4] : [],
-    fill: !sc.thick,
-    hidden: isHidden,
-  };
-}
-
-function renderLegend() {
-  const row = document.getElementById('legendRow');
-  row.innerHTML = '';
-  SCENARIOS.forEach(sc => {
-    const el = document.createElement('div');
-    el.className = 'leg' + (hidden.has(sc.id) ? ' hidden' : '');
-    el.innerHTML = `<div class="leg-dot" style="background:${sc.color}"></div>${sc.label}`;
-    el.addEventListener('click', () => {
-      if(hidden.has(sc.id)) hidden.delete(sc.id);
-      else hidden.add(sc.id);
-      update();
-    });
-    row.appendChild(el);
-  });
-}
-
-function renderCards(results, invested) {
-  const grid = document.getElementById('cardsGrid');
-  const sorted = SCENARIOS.map(sc => ({ sc, final: results[sc.id][results[sc.id].length-1] })).sort((a,b) => b.final - a.final);
-  grid.innerHTML = '';
-  sorted.forEach(({sc, final}, rank) => {
-    const profit = final - invested;
-    const pct    = ((profit/invested)*100).toFixed(1);
-    const isWinner = rank === 0;
-    const card = document.createElement('div');
-    card.className = 'card' + (isWinner ? ' card-winner' : '');
-    card.innerHTML = `
-      <div class="card-bar" style="background:${sc.color}"></div>
-      <div class="card-rank">#${rank+1}</div>
-      <div class="card-name">${sc.label}</div>
-      <div class="card-value" style="color:${sc.color}">${fmtRub(final)}</div>
-      <div class="card-profit ${profit>=0?'pos':'neg'}" style="font-family:'DM Mono',monospace;font-size:11px;">
-        ${profit>=0?'+':''}${fmtRub(profit)} / ${profit>=0?'+':''}${pct}%
-      </div>`;
-    grid.appendChild(card);
-  });
-}
-
-function renderTable(results, invested) {
+function renderTable() {
   const body = document.getElementById('tableBody');
-  const sorted = SCENARIOS.map(sc => ({ sc, final: results[sc.id][results[sc.id].length-1] })).sort((a,b) => b.final - a.final);
+  const finalIndex = labels.length - 1;
+  const inv = globalInvestedArray[finalIndex];
+  const sorted = SCENARIOS.map(sc => ({ sc, final: globalResults[sc.id][finalIndex] })).sort((a,b) => b.final - a.final);
   body.innerHTML = '';
   sorted.forEach(({sc, final}, rank) => {
-    const profit  = final - invested;
-    const pct     = ((profit/invested)*100).toFixed(1);
+    const profit  = final - inv;
+    const pct     = ((profit/inv)*100).toFixed(1);
     const tr = document.createElement('tr');
     if(rank===0) tr.className='top-row';
     tr.innerHTML = `
-      <td>
-        <span class="rank-num">${rank+1}</span>
-        <span class="dot-inline" style="background:${sc.color}"></span>
-        ${sc.label}
-      </td>
-      <td class="neut">${fmtFull(invested)}</td>
+      <td><span class="rank-num">${rank+1}</span><span class="dot-inline" style="background:${sc.color}"></span>${sc.label}</td>
+      <td class="neut">${fmtFull(inv)}</td>
       <td style="color:${sc.color};font-weight:500">${fmtFull(final)}</td>
       <td class="${profit>=0?'pos':'neg'}">${profit>=0?'+':''}${fmtFull(profit)}</td>
       <td class="${profit>=0?'pos':'neg'}">${profit>=0?'+':''}${pct}%</td>`;
@@ -936,13 +548,33 @@ function renderTable(results, invested) {
 }
 
 function update() {
-  const { results, invested } = runAll();
-  chart.data.datasets = SCENARIOS.map(sc => buildDataset(sc, results[sc.id]));
+  runCalculations();
+  chart.data.datasets = SCENARIOS.map(sc => {
+    return {
+      id: sc.id, label: sc.label, data: globalResults[sc.id],
+      borderColor: sc.color, backgroundColor: sc.colorLt,
+      borderWidth: sc.thick ? 3 : 1.8, borderDash: sc.thick ? [6,4] : [], fill: !sc.thick,
+      hidden: hidden.has(sc.id)
+    };
+  });
   chart.update();
-  renderLegend();
-  renderCards(results, invested);
-  renderTable(results, invested);
-  document.getElementById('totalInv').textContent = fmtFull(invested);
+
+  const row = document.getElementById('legendRow');
+  row.innerHTML = '';
+  SCENARIOS.forEach(sc => {
+    const el = document.createElement('div');
+    el.className = 'leg' + (hidden.has(sc.id) ? ' hidden' : '');
+    el.innerHTML = `<div class="leg-dot" style="background:${sc.color}"></div>${sc.label}`;
+    el.addEventListener('click', () => {
+      if(hidden.has(sc.id)) hidden.delete(sc.id); else hidden.add(sc.id);
+      update();
+    });
+    row.appendChild(el);
+  });
+
+  renderCardsData(labels.length - 1);
+  renderTable();
+  document.getElementById('totalInv').textContent = fmtFull(globalInvestedArray[globalInvestedArray.length-1]);
 }
 
 const amtInput = document.getElementById('amtInput');
@@ -952,18 +584,13 @@ function setMonthly(v) {
   monthly = Math.max(0, Math.min(500000, +v || 0));
   amtInput.value = monthly;
   amtRange.value = Math.min(monthly, 15000); 
-  document.querySelectorAll('.preset-btn').forEach(b => {
-    b.classList.toggle('active', +b.dataset.v === monthly);
-  });
+  document.querySelectorAll('.preset-btn').forEach(b => { b.classList.toggle('active', +b.dataset.v === monthly); });
   update();
 }
 
 amtInput.addEventListener('input', () => setMonthly(amtInput.value));
 amtRange.addEventListener('input', () => setMonthly(amtRange.value));
-
-document.querySelectorAll('.preset-btn').forEach(b => {
-  b.addEventListener('click', () => setMonthly(b.dataset.v));
-});
+document.querySelectorAll('.preset-btn').forEach(b => { b.addEventListener('click', () => setMonthly(b.dataset.v)); });
 
 (function boot() {
   const parsed = Papa.parse(CSV_RAW.trim(), { header: true, skipEmptyLines: true, dynamicTyping: true });
@@ -973,6 +600,7 @@ document.querySelectorAll('.preset-btn').forEach(b => {
     const mn = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
     return mn[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
   });
+  initCardsDOM();
   initChart();
   setMonthly(5000); 
 })();
